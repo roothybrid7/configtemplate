@@ -1,0 +1,58 @@
+# dhcpd.conf
+ddns-updates on;
+ddns-update-style interim;
+ignore client-updates;
+
+ddns-domainname "example.com.";
+authoritative;
+
+key "example.com" {
+	algorithm hmac-md5;
+	secret "DpYbe90UfR0NoDJas6KrXvU9bzttjDm3BNnkLeUQmpQ8tj+582kITsKO+2nNxiQA6znteCFKSld+mHympbt2QA==";
+};
+
+zone example.com. {
+	primary 192.168.11.20;
+	key example.com;
+}
+
+zone 11.168.192.in-addr.arpa. {
+	primary 192.168.11.20;
+	key example.com;
+}
+subnet 192.168.11.0 netmask 255.255.255.0 {
+#	authority;
+
+# --- default gateway
+	option routers			gw01.example.com;
+	option subnet-mask		255.255.255.0;
+	option broadcast-address	192.168.11.255;
+
+	option nis-domain		"example.com";
+	option domain-name		"example.com";
+	option domain-name-servers	192.168.11.247, 192.168.11.20;
+
+	option time-offset		-18000;	# Eastern Standard Time
+#	option ntp-servers		192.168.1.1;
+#	option netbios-name-servers	192.168.1.1;
+
+	pool {
+		failover peer "dhcp-failover";
+		range 192.168.11.64 192.168.11.127;
+		default-lease-time 21600;
+		max-lease-time 43200;
+	}
+
+	# we want the nameserver to appear at a fixed address
+#	host ns {
+#		next-server marvin.redhat.com;
+#		hardware ethernet 12:34:56:78:AB:CD;
+#		fixed-address 207.175.42.254;
+#	}
+}
+
+subnet 172.31.255.0 netmask 255.255.255.0 {
+}
+
+subnet 10.255.255.0 netmask 255.255.255.0 {
+}
