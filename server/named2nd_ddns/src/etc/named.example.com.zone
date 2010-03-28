@@ -1,3 +1,4 @@
+# @(#) BIND version 9.6.x
 # zone: example.com
 zone "example.com." {
 	type slave;
