@@ -1,4 +1,4 @@
-filename: /etc/dhcp/dhcpd.master
+filename: /etc/dhcp/master.conf
 owner: root
 uid: 0
 group: root
