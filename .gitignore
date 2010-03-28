@@ -1,0 +1,5 @@
+# ignore list
+*.[oa]
+*~
+*[._]b?k
+*.ori*

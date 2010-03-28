@@ -1,0 +1,21 @@
+# zone: example.com
+zone "example.com." {
+	type slave;
+	masters { 192.168.11.20; };
+	file "example.com.db";
+	allow-transfer { key example.com; };
+#	allow-update {
+#		localhost;
+#	        localnets;
+#	};
+};
+zone "11.168.192.in-addr.arpa." {
+	type slave;
+	masters { 192.168.11.20; };
+	file "11.168.192.in-addr.arpa.db";
+	allow-transfer { key example.com; };
+#	allow-update {
+#		localhost;
+#		localnets;
+#	};
+};

@@ -1,0 +1,6 @@
+filename: /etc/named.example.com.zone
+owner: root
+uid: 0
+group: named
+gid: 25
+mode: 640
